@@ -16,6 +16,10 @@
 *.iml
 *.ipr
 
+target/
+bizSys/
+test-keystore-manager.jks
+
 ### NetBeans ###
 /nbproject/private/
 /build/
