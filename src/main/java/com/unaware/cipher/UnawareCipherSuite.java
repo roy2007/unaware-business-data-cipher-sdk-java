@@ -21,7 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
 /**
- * yunwuye加密SDK主入口类，提供统一的API访问点
+ * UnawareCipherSuite加密SDK主入口类，提供统一的API访问点
  * @author Roy rui wang
  * @version 1.0
  * @since 2024年05月02日
