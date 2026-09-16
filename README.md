@@ -33,23 +33,20 @@ import com.unaware.cipher.yunwuyeEncryptionSDK;
 import com.unaware.cipher.exception.EncryptionException;
 
 public class QuickStartExample {
-    public static void main(String[] args) {
+    @Value("${keystore.file.local.path}") 
+    String keyStoreLocalPath;
+    @Value("${keystore.file.remote.path}") 
+    String keyStoreRemotePath;
+
+    @Value("${keystore.password}")
+    String keyStorePassword;
+    public UnawareCipherSuite loadUnawareCipherSuite(){
         try {
-            // 创建新的密钥库（或使用yunwuyeEncryptionSDK.loadExisting加载现有密钥库）
-            yunwuyeEncryptionSDK sdk = yunwuyeEncryptionSDK.createNew("keystore.jks", "keystore-password");
-
-            // 创建并存储根密钥
-            sdk.createRootKey("root-key-password");
-
-            // 保存更改
-            sdk.saveKeyStore();
-
-            System.out.println("SDK初始化成功");
-
-            // 使用完毕后关闭SDK
-            sdk.close();
+            //或使用UnawareCipherSuite.loadExisting加载现有密钥库
+            String keyStorePath = remoteEnabled ? keyStoreRemotePath : keyStoreLocalPath;
+            return UnawareCipherSuite.loadExisting(keyStorePath, UnawareCipherSuite.getPasswordFromBase64(keyStorePassword));
         } catch (EncryptionException e) {
-            System.err.println("SDK初始化失败: " + e.getMessage());
+            throw new RuntimeException(ex);
         }
     }
 }
